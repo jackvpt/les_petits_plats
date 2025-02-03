@@ -99,12 +99,6 @@ export default class RecipeModel {
       !selectedFilters.appliances.size &&
       !selectedFilters.ustensils.size
     ) {
-    if (
-      !searchBarFilter &&
-      !selectedFilters.ingredients.size &&
-      !selectedFilters.appliances.size &&
-      !selectedFilters.ustensils.size
-    ) {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
 
@@ -129,17 +123,16 @@ export default class RecipeModel {
       const recipeIngredients = new Set()
       const recipeUstensils = new Set()
 
-      /** Normalize ingrédients and adding in a Set */
+      // Normaliser les ingrédients et les ajouter dans un Set
       recipe.ingredients.forEach((ing) => {
         recipeIngredients.add(this.normalizeText(ing.ingredient))
       })
 
-      /** Normalize ustensils and adding in a Set */
+      // Normaliser les ustensiles et les ajouter dans un Set
       recipe.ustensils.forEach((ust) => {
         recipeUstensils.add(this.normalizeText(ust))
       })
 
-      /** Nomalize appliances */
       const normalizedAppliance = this.normalizeText(recipe.appliance)
 
       let matchesSearchBar = false
