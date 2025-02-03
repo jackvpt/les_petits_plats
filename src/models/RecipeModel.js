@@ -77,7 +77,12 @@ export default class RecipeModel {
   static getFilteredRecipes() {
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
-    if (!searchBarFilter && !selectedFilters.ingredients.size && !selectedFilters.appliances.size && !selectedFilters.ustensils.size) {
+    if (
+      !searchBarFilter &&
+      !selectedFilters.ingredients.size &&
+      !selectedFilters.appliances.size &&
+      !selectedFilters.ustensils.size
+    ) {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
 
@@ -94,7 +99,68 @@ export default class RecipeModel {
     /** Start chronometer */
     const startTime = performance.now()
 
-    const filteredRecipes = recipes
+    const filteredRecipes = []
+
+    recipes.forEach((recipe) => {
+      const normalizedRecipeName = this.normalizeText(recipe.name)
+      const normalizedRecipeDescription = this.normalizeText(recipe.description)
+      const recipeIngredients = new Set()
+      const recipeUstensils = new Set()
+
+      // Normaliser les ingrédients et les ajouter dans un Set
+      recipe.ingredients.forEach((ing) => {
+        recipeIngredients.add(this.normalizeText(ing.ingredient))
+      })
+
+      // Normaliser les ustensiles et les ajouter dans un Set
+      recipe.ustensils.forEach((ust) => {
+        recipeUstensils.add(this.normalizeText(ust))
+      })
+
+      const normalizedAppliance = this.normalizeText(recipe.appliance)
+
+      let matchesSearchBar = false
+      if (!searchBarFilter) {
+        matchesSearchBar = true
+      } else if (
+        normalizedRecipeName.includes(searchBarFilter) ||
+        normalizedRecipeDescription.includes(searchBarFilter)
+      ) {
+        matchesSearchBar = true
+      } else {
+        recipeIngredients.forEach((ing) => {
+          if (ing.includes(searchBarFilter)) {
+            matchesSearchBar = true
+          }
+        })
+      }
+
+      let matchesIngredients = true
+      ingredientsFilter.forEach((filter) => {
+        if (!recipeIngredients.has(filter)) {
+          matchesIngredients = false
+        }
+      })
+
+      let matchesAppliance =
+        appliancesFilter.size === 0 || appliancesFilter.has(normalizedAppliance)
+
+      let matchesUstensils = true
+      ustensilsFilter.forEach((filter) => {
+        if (!recipeUstensils.has(filter)) {
+          matchesUstensils = false
+        }
+      })
+
+      if (
+        matchesSearchBar &&
+        matchesIngredients &&
+        matchesAppliance &&
+        matchesUstensils
+      ) {
+        filteredRecipes.push(recipe)
+      }
+    })
 
     const endTime = performance.now()
     console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
