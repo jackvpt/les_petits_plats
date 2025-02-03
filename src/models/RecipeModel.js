@@ -129,16 +129,17 @@ export default class RecipeModel {
       const recipeIngredients = new Set()
       const recipeUstensils = new Set()
 
-      // Normaliser les ingrédients et les ajouter dans un Set
+      /** Normalize ingrédients and adding in a Set */
       recipe.ingredients.forEach((ing) => {
         recipeIngredients.add(this.normalizeText(ing.ingredient))
       })
 
-      // Normaliser les ustensiles et les ajouter dans un Set
+      /** Normalize ustensils and adding in a Set */
       recipe.ustensils.forEach((ust) => {
         recipeUstensils.add(this.normalizeText(ust))
       })
 
+      /** Nomalize appliances */
       const normalizedAppliance = this.normalizeText(recipe.appliance)
 
       let matchesSearchBar = false
