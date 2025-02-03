@@ -76,56 +76,30 @@ export default class RecipeModel {
    */
   static getFilteredRecipes() {
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
-    const ingredientsFilter = Array.from(selectedFilters.ingredients).map(
-      this.normalizeText
+
+    if (!searchBarFilter && !selectedFilters.ingredients.size && !selectedFilters.appliances.size && !selectedFilters.ustensils.size) {
+      return recipes.map((recipe) => new RecipeModel(recipe))
+    }
+
+    const ingredientsFilter = new Set(
+      Array.from(selectedFilters.ingredients).map(this.normalizeText)
     )
-    const appliancesFilter = Array.from(selectedFilters.appliances).map(
-      this.normalizeText
+    const appliancesFilter = new Set(
+      Array.from(selectedFilters.appliances).map(this.normalizeText)
     )
-    const ustensilsFilter = Array.from(selectedFilters.ustensils).map(
-      this.normalizeText
+    const ustensilsFilter = new Set(
+      Array.from(selectedFilters.ustensils).map(this.normalizeText)
     )
 
-    return recipes.filter((recipe) => {
-      const normalizedRecipeName = this.normalizeText(recipe.name)
-      const normalizedRecipeDescription = this.normalizeText(recipe.description)
-      const normalizedRecipeIngredients = recipe.ingredients.map((ing) =>
-        this.normalizeText(ing.ingredient)
-      )
+    /** Start chronometer */
+    const startTime = performance.now()
 
-      /** Check search bar filter */
-      const matchesSearchBar =
-        !searchBarFilter ||
-        normalizedRecipeName.includes(searchBarFilter) ||
-        normalizedRecipeDescription.includes(searchBarFilter) ||
-        normalizedRecipeIngredients.includes(searchBarFilter)
+    const filteredRecipes = recipes
 
-      /** Check ingredients filter */
-      const recipeIngredients = recipe.ingredients.map((ing) =>
-        this.normalizeText(ing.ingredient)
-      )
-      const matchesIngredients = ingredientsFilter.every((filter) =>
-        recipeIngredients.includes(filter)
-      )
+    const endTime = performance.now()
+    console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
+    console.log(`Filtered recipes count: ${filteredRecipes.length}`)
 
-      /** Check appliance filter */
-      const matchesAppliance =
-        !appliancesFilter.length ||
-        appliancesFilter.includes(this.normalizeText(recipe.appliance))
-
-      /** Check ustensils filter */
-      const recipeUstensils = recipe.ustensils.map(this.normalizeText)
-      const matchesUstensils = ustensilsFilter.every((filter) =>
-        recipeUstensils.includes(filter)
-      )
-
-      /** Return true if all filters match */
-      return (
-        matchesSearchBar &&
-        matchesIngredients &&
-        matchesAppliance &&
-        matchesUstensils
-      )
-    })
+    return filteredRecipes
   }
 }
