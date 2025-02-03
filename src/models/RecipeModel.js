@@ -99,7 +99,7 @@ export default class RecipeModel {
       Array.from(selectedFilters.ustensils).map(this.normalizeText)
     )
 
-    const filteredRecipes = recipes
+
 
     const endTime = performance.now()
     console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
