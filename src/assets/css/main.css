@@ -1,0 +1,25 @@
+/* Variables and mixins*/
+/* Fonts */
+/* Colors */
+/* Responsive */
+/* Gradient */
+/* Responsive */
+/* Animations */
+/* Base styles */
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  background-color: white;
+  max-width: 1440px;
+  margin: 0 auto;
+}/*# sourceMappingURL=main.css.map */

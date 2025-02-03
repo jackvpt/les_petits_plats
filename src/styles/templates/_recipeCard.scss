@@ -1,0 +1,62 @@
+.article-recipe {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 4px 34px 30px #0000000a;
+}
+
+.card {
+  height: 730px;
+  position: relative;
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.recipe-time {
+  position: absolute;
+  background-color: $yellow;
+  font-size: 12px;
+  text-align: center;
+  align-content: center;
+  right: 20px;
+  top: 20px;
+  height:24px;
+  border-radius: 10px;
+  padding:0 10px;
+}
+
+.card-title {
+  font-family: $font_title;
+  font-size: 18px;
+}
+
+.card-body {
+  padding: 40px 25px 40px;
+}
+
+.recipe-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: $grey;
+  letter-spacing: 0.09em;
+  margin-bottom: 20px;
+}
+
+.recipe-description {
+  font-size: 14px;
+  margin-bottom: 30px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.ingredient-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: $black;
+}
+
+.ingredient-quantity {
+  color: $grey;
+}

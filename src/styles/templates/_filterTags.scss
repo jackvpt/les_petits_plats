@@ -1,0 +1,35 @@
+.container-filterTags {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 10px;
+
+  .filter-tag {
+    padding: 15px;
+    background-color: $yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 60px;
+    border-radius: 10px;
+    width:100%;
+
+    @include tablet-responsive {
+      width: auto;
+    }
+
+    .itemRemove-button {
+      border: none;
+      background-color: inherit;
+      i {
+        color: $black;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}

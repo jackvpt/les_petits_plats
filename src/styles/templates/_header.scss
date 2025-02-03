@@ -1,0 +1,128 @@
+header {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-image: url("/src/assets/images/background.webp");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+
+  @include desktop-responsive {
+    height: 670px;
+    row-gap: 30px;
+  }
+
+  .header-logo {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 150px;
+
+    @include desktop-responsive {
+      left: 70px;
+      top: 50px;
+      width: 210px;
+    }
+  }
+
+  .header-title {
+    color: $yellow;
+    font-family: $font_title;
+    font-size: 22px;
+    text-align: center;
+    padding: 0 10px;
+    line-height: 40px;
+    margin-top: 60px;
+
+    @include tablet-responsive {
+      font-size: 36px;
+      line-height: 50px;
+      margin-top: 0;
+    }
+    @include desktop-responsive {
+      font-size: 44px;
+      line-height: 66px;
+    }
+  }
+
+  .search-form {
+    position: relative;
+    width: 90%;
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @include desktop-responsive {
+      width: 66%;
+    }
+  }
+
+  .search-input {
+    height: 50px;
+    font-size: 12px;
+
+    @include desktop-responsive {
+      height: 100%;
+      font-size: 1rem;
+    }
+  }
+
+  .searchClear-button {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 70px;
+    transform: translateY(-50%);
+  }
+
+  .searchClear-icon {
+    font-size: 24px;
+    color: $grey;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  .search-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #1b1b1b;
+    border: none;
+    border-radius: 10px;
+
+    @include desktop-responsive {
+      width: 50px;
+      height: 50px;
+    }
+
+    &:hover {
+      background-color: $yellow;
+    }
+
+    &:hover .search-icon {
+      color: black;
+    }
+
+    .search-icon {
+      color: white;
+      font-size: 16px;
+      @include desktop-responsive {
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./base/typography";
+@import "./templates/header";
+@import "./templates/filterBar";
+@import "./templates/filterTags";
+@import "./templates/filterItem";
+@import "./templates/selectedFilterItem";
+@import "./templates/index";
+@import "./templates/recipeCard";

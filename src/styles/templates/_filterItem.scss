@@ -1,0 +1,22 @@
+.filter-items {
+  margin-top: 20px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $lightGrey;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}

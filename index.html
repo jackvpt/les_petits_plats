@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/src/assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/src/assets/images/favicon-16x16.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/assets/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/5397a1a858.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <!-- ======================= -->
+    <!-- HEADER -->
+    <!-- ======================= -->
+    <header>
+      <img
+        src="/src/assets/images/logo.png"
+        alt="Logo Les petits plats"
+        class="header-logo"
+      />
+      <h2 class="header-title">
+        CHERCHEZ PARMI PLUS DE 1500 RECETTES<br />DU QUOTIDIEN, SIMPLES ET
+        DÉLICIEUSES
+      </h2>
+      <div class="search-form">
+        <input
+          id="inputSearch"
+          class="form-control search-input ps-4"
+          type="text"
+          placeholder="Rechercher une recette, un ingrédient, ..."
+          aria-label="Search"
+        />
+        <button id="searchClear-button" class="btn searchClear-button">
+          <i class="fa-solid fa-xmark searchClear-icon"></i>
+        </button>
+        <button id="search_button" class="btn search-button" type="submit">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ======================= -->
+    <!-- MAIN -->
+    <!-- ======================= -->
+    <main>
+      <!-- FILTER BAR -->
+      <section id="container-filterBar" class="container container-filterBar">
+        <!-- Buttons -->
+        <div id="container-filterBar__buttons" class="container-filterBar__buttons">
+      </section>
+
+      <!-- FILTER TAGS -->
+      <section
+        id="filter-tags"
+        class="container container-filterTags"
+      ></section>
+
+      <!-- Recipes -->
+      <section class="container mt-5 justify-content-center">
+        <div
+          id="container-recipes"
+          class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gx-5 g-4"
+        ></div>
+      </section>
+    </main>
+
+    <!-- ======================= -->
+    <!-- SCRIPTS -->
+    <!-- ======================= -->
+    <script type="module" src="/src/scripts/main.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

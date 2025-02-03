@@ -1,0 +1,36 @@
+*,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: $font_body;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  background-color: white;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: $lightGrey;
+}
