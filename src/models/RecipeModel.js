@@ -118,6 +118,9 @@ export default class RecipeModel {
       Array.from(selectedFilters.ustensils).map(this.normalizeText)
     )
 
+    /** Start chronometer */
+    const startTime = performance.now()
+
     const filteredRecipes = recipes.filter((recipe) => {
       const normalizedRecipeName = this.normalizeText(recipe.name)
       const normalizedRecipeDescription = this.normalizeText(recipe.description)
