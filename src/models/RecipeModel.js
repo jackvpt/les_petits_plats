@@ -103,9 +103,6 @@ export default class RecipeModel {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
 
-    /** Start chronometer */
-    const startTime = performance.now()
-
     /** Normalize filters */
     let ingredientsFilter = new Set()
     selectedFilters.ingredients.forEach((ingredient) => {
