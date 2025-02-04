@@ -75,6 +75,9 @@ export default class RecipeModel {
    * @returns {Array} recipes
    */
   static getFilteredRecipes() {
+    /** Start chronometer */
+    const startTime = performance.now()
+
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
     /** Checks if all filters are empty */
@@ -86,9 +89,6 @@ export default class RecipeModel {
     ) {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
-
-    /** Start chronometer */
-    const startTime = performance.now()
 
     /** Normalize filters */
     let ingredientsFilter = new Set()
