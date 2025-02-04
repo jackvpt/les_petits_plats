@@ -77,8 +77,12 @@ header {
     display: none;
     position: absolute;
     top: 50%;
-    right: 70px;
+    right: 50px;
     transform: translateY(-50%);
+
+    @include desktop-responsive {
+      right: 70px;
+    }
   }
 
   .searchClear-icon {
@@ -120,9 +124,6 @@ header {
     .search-icon {
       color: white;
       font-size: 16px;
-      @include desktop-responsive {
-        font-size: 16px;
-      }
     }
   }
 }
