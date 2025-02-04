@@ -90,7 +90,9 @@ export default class RecipeModel {
   static getFilteredRecipes() {
     /** Start chronometer */
     const startTime = performance.now()
-    
+
+    const recipes = RecipeModel.getRecipes()
+
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
     if (
@@ -99,30 +101,32 @@ export default class RecipeModel {
       !selectedFilters.ingredients.size &&
       !selectedFilters.appliances.size &&
       !selectedFilters.ustensils.size
-    ) {
-    if (
-      !searchBarFilter &&
-     
-      !selectedFilters.ingredients.size &&
-     
-      !selectedFilters.appliances.size &&
-     
-      !selectedFilters.ustensils.size
-    
-    ) {
-      return recipes.map((recipe) => new RecipeModel(recipe))
-    }
+    ) 
+        return recipes.map((recipe) => new RecipeModel(recipe))
+      
 
-    const ingredientsFilter = new Set(
-      Array.from(selectedFilters.ingredients).map(this.normalizeText)
-    )
-    const appliancesFilter = new Set(
-      Array.from(selectedFilters.appliances).map(this.normalizeText)
-    )
-    const ustensilsFilter = new Set(
-      Array.from(selectedFilters.ustensils).map(this.normalizeText)
-    )
+      const ingredientsFilter = new Set(
+        Array.from(selectedFilters.ingredients).map(this.normalizeText)
+      )
+      const appliancesFilter = new Set(
+        Array.from(selectedFilters.appliances).map(this.normalizeText)
+      )
+      const ustensilsFilter = new Set(
+        Array.from(selectedFilters.ustensils).map(this.normalizeText)
+      )
 
+      const filteredRecipes = recipes.filter((recipe) => {
+        const normalizedRecipeName = this.normalizeText(recipe.name)
+        const normalizedRecipeDescription = this.normalizeText(
+          recipe.description
+        )
+        const recipeIngredients = new Set(
+          recipe.ingredients.map((ing) => this.normalizeText(ing.ingredient))
+        )
+        const normalizedAppliance = this.normalizeText(recipe.appliance)
+        const recipeUstensils = new Set(
+          recipe.ustensils.map(this.normalizeText)
+        )
     const filteredRecipes = recipes.filter((recipe) => {
       const normalizedRecipeName = this.normalizeText(recipe.name)
       const normalizedRecipeDescription = this.normalizeText(recipe.description)
@@ -132,39 +136,40 @@ export default class RecipeModel {
       const normalizedAppliance = this.normalizeText(recipe.appliance)
       const recipeUstensils = new Set(recipe.ustensils.map(this.normalizeText))
 
-      /** Check search bar filter */
-      const matchesSearchBar =
-        !searchBarFilter ||
-        normalizedRecipeName.includes(searchBarFilter) ||
-        normalizedRecipeDescription.includes(searchBarFilter) ||
-        [...recipeIngredients].some((ing) => ing.includes(searchBarFilter))
+        /** Check search bar filter */
+        const matchesSearchBar =
+          !searchBarFilter ||
+          normalizedRecipeName.includes(searchBarFilter) ||
+          normalizedRecipeDescription.includes(searchBarFilter) ||
+          [...recipeIngredients].some((ing) => ing.includes(searchBarFilter))
 
-      /** Check ingredients filter */
-      const matchesIngredients = [...ingredientsFilter].every((filter) =>
-        recipeIngredients.has(filter)
-      )
+        /** Check ingredients filter */
+        const matchesIngredients = [...ingredientsFilter].every((filter) =>
+          recipeIngredients.has(filter)
+        )
 
-      /** Check appliance filter */
-      const matchesAppliance =
-        !appliancesFilter.size || appliancesFilter.has(normalizedAppliance)
+        /** Check appliance filter */
+        const matchesAppliance =
+          !appliancesFilter.size || appliancesFilter.has(normalizedAppliance)
 
-      /** Check ustensils filter */
-      const matchesUstensils = [...ustensilsFilter].every((filter) =>
-        recipeUstensils.has(filter)
-      )
+        /** Check ustensils filter */
+        const matchesUstensils = [...ustensilsFilter].every((filter) =>
+          recipeUstensils.has(filter)
+        )
 
-      return (
-        matchesSearchBar &&
-        matchesIngredients &&
-        matchesAppliance &&
-        matchesUstensils
-      )
-    })
+        return (
+          matchesSearchBar &&
+          matchesIngredients &&
+          matchesAppliance &&
+          matchesUstensils
+        )
+      })
 
-    const endTime = performance.now()
-    console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
-    console.log(`Filtered recipes count: ${filteredRecipes.length}`)
+      const endTime = performance.now()
+      console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
+      console.log(`Filtered recipes count: ${filteredRecipes.length}`)
 
-    return filteredRecipes
+      return filteredRecipes
+    }
   }
-}
+
