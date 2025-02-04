@@ -94,6 +94,7 @@ export default class RecipeModel {
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
     if (
+      
       !searchBarFilter &&
       !selectedFilters.ingredients.size &&
       !selectedFilters.appliances.size &&
@@ -101,9 +102,13 @@ export default class RecipeModel {
     ) {
     if (
       !searchBarFilter &&
+     
       !selectedFilters.ingredients.size &&
+     
       !selectedFilters.appliances.size &&
+     
       !selectedFilters.ustensils.size
+    
     ) {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
@@ -117,9 +122,6 @@ export default class RecipeModel {
     const ustensilsFilter = new Set(
       Array.from(selectedFilters.ustensils).map(this.normalizeText)
     )
-
-    /** Start chronometer */
-    const startTime = performance.now()
 
     const filteredRecipes = recipes.filter((recipe) => {
       const normalizedRecipeName = this.normalizeText(recipe.name)
