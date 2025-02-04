@@ -109,7 +109,7 @@ const showFilterMenu = (category) => {
  */
 const inputFilterHandler = (category) => {
   const searchValue = document.getElementById(`input_${category}`).value
-  if (searchValue.length >= 3) {
+  if (searchValue.length >= 1) {
     document.getElementById(`${category}-clearButton`).style.display = "block"
     addFilterItems({ category, key: searchValue })
   } else {
