@@ -77,6 +77,7 @@ export default class RecipeModel {
   static getFilteredRecipes() {
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
+    /** Checks if all filters are empty */
     if (
       !searchBarFilter &&
       !selectedFilters.ingredients.size &&
@@ -86,40 +87,48 @@ export default class RecipeModel {
       return recipes.map((recipe) => new RecipeModel(recipe))
     }
 
-    const ingredientsFilter = new Set(
-      Array.from(selectedFilters.ingredients).map(this.normalizeText)
-    )
-    const appliancesFilter = new Set(
-      Array.from(selectedFilters.appliances).map(this.normalizeText)
-    )
-    const ustensilsFilter = new Set(
-      Array.from(selectedFilters.ustensils).map(this.normalizeText)
-    )
-
     /** Start chronometer */
     const startTime = performance.now()
 
+    /** Normalize filters */
+    let ingredientsFilter = new Set()
+    selectedFilters.ingredients.forEach((ingredient) => {
+      ingredientsFilter.add(this.normalizeText(ingredient))
+    })
+    let appliancesFilter = new Set()
+    selectedFilters.appliances.forEach((appliance) => {
+      appliancesFilter.add(this.normalizeText(appliance))
+    })
+    let ustensilsFilter = new Set()
+    selectedFilters.ustensils.forEach((ustensil) => {
+      ustensilsFilter.add(this.normalizeText(ustensil))
+    })
+
     const filteredRecipes = []
 
-    recipes.forEach((recipe) => {
+    for (let idx = 0; idx < recipes.length; idx++) {
+      const recipe = recipes[idx]
       const normalizedRecipeName = this.normalizeText(recipe.name)
       const normalizedRecipeDescription = this.normalizeText(recipe.description)
       const recipeIngredients = new Set()
       const recipeUstensils = new Set()
 
       /** Normalize ingrédients and adding in a Set */
-      recipe.ingredients.forEach((ing) => {
-        recipeIngredients.add(this.normalizeText(ing.ingredient))
-      })
+      for (let idx = 0; idx < recipe.ingredients.length; idx++) {
+        recipeIngredients.add(
+          this.normalizeText(recipe.ingredients[idx].ingredient)
+        )
+      }
 
       /** Normalize ustensils and adding in a Set */
-      recipe.ustensils.forEach((ust) => {
-        recipeUstensils.add(this.normalizeText(ust))
-      })
+      for (let idx = 0; idx < recipe.ustensils.length; idx++) {
+        recipeUstensils.add(this.normalizeText(recipe.ustensils[idx]))
+      }
 
       /** Nomalize appliances */
       const normalizedAppliance = this.normalizeText(recipe.appliance)
 
+      /** Search from global search bar value */
       let matchesSearchBar = false
       if (!searchBarFilter) {
         matchesSearchBar = true
@@ -129,26 +138,30 @@ export default class RecipeModel {
       ) {
         matchesSearchBar = true
       } else {
-        recipeIngredients.forEach((ing) => {
-          if (ing.includes(searchBarFilter)) {
+        recipeIngredients.forEach((ingredient) => {
+          if (ingredient.includes(searchBarFilter)) {
             matchesSearchBar = true
           }
         })
       }
 
+      /** Search from ingredients filter */
       let matchesIngredients = true
-      ingredientsFilter.forEach((filter) => {
-        if (!recipeIngredients.has(filter)) {
+      ingredientsFilter.forEach((ingredient) => {
+        if (!recipeIngredients.has(ingredient)) {
           matchesIngredients = false
         }
       })
 
+      /** Search from appliance filter */
       let matchesAppliance =
         appliancesFilter.size === 0 || appliancesFilter.has(normalizedAppliance)
 
+      /** Search from ustensils filter */
       let matchesUstensils = true
-      ustensilsFilter.forEach((filter) => {
-        if (!recipeUstensils.has(filter)) {
+
+      ustensilsFilter.forEach((ustensil) => {
+        if (!recipeUstensils.has(ustensil)) {
           matchesUstensils = false
         }
       })
@@ -161,7 +174,7 @@ export default class RecipeModel {
       ) {
         filteredRecipes.push(recipe)
       }
-    })
+    }
 
     const endTime = performance.now()
     console.log(`Execution delay: ${(endTime - startTime).toFixed(2)} ms`)
