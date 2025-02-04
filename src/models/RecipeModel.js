@@ -77,9 +77,15 @@ export default class RecipeModel {
   static getFilteredRecipes() {
     /** Start chronometer */
     const startTime = performance.now()
-
+    
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
+    if (
+      !searchBarFilter &&
+      !selectedFilters.ingredients.size &&
+      !selectedFilters.appliances.size &&
+      !selectedFilters.ustensils.size
+    ) {
     if (
       !searchBarFilter &&
       !selectedFilters.ingredients.size &&
@@ -98,7 +104,6 @@ export default class RecipeModel {
     const ustensilsFilter = new Set(
       Array.from(selectedFilters.ustensils).map(this.normalizeText)
     )
-
 
     const filteredRecipes = recipes.filter((recipe) => {
       const normalizedRecipeName = this.normalizeText(recipe.name)
