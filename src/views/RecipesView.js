@@ -1,4 +1,4 @@
-import RecipeCard from "./templates/recipeCard.js"
+import RecipeCard from "./templates/RecipeCard.js"
 
 /**
  * POPULATE RECIPES CONTAINER
