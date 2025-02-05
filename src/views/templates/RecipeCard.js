@@ -15,7 +15,7 @@ const RecipeCard = (recipe) => {
   /** Recipe image */
   const image = document.createElement("img")
   image.className = "card-img-top rounded-top-4"
-  image.src = `./src/assets/images/recipes/${recipe.image}`
+  image.src = `${window.location.origin}/src/assets/images/recipes/${recipe.image}`;
   image.alt = recipe.name
 
   /** Recipe time */
