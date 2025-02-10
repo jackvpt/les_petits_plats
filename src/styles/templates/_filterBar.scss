@@ -17,7 +17,7 @@
     &-ingredients,
     &-appliances,
     &-ustensils {
-      width:100%;
+      width: 100%;
       background-color: white;
       border-radius: 10px;
       position: relative;
@@ -25,11 +25,6 @@
       @include tablet-responsive {
         width: 195px;
       }
-    }
-
-    .rotate {
-      transform: rotate(180deg);
-      transition: transform 0.3s ease; /* Transition fluide */
     }
 
     .filterButton {
@@ -43,10 +38,19 @@
       &-name {
         font-size: 16px;
         font-weight: 500;
-
       }
       &:hover {
         cursor: pointer;
+      }
+
+      i {
+        transform: rotate(0deg);
+        transition: transform 0.3s ease;
+      }
+
+      .rotate {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
       }
     }
 

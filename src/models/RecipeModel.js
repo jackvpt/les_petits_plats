@@ -32,12 +32,15 @@ export default class RecipeModel {
    * @returns Set
    */
   static getIngredients(recipes) {
-    return [
-      ...new Set(
-        recipes.flatMap((recipe) => recipe.ingredients.map((i) => i.ingredient))
-      ),
-    ]
+    return [...new Set(
+      recipes.flatMap((recipe) => 
+        recipe.ingredients.map((i) => 
+          i.ingredient.charAt(0).toUpperCase() + i.ingredient.slice(1).toLowerCase()
+        )
+      )
+    )];
   }
+  
 
   /**
    * GET APPLIANCES FROM RECIPES
@@ -45,8 +48,13 @@ export default class RecipeModel {
    * @returns Set
    */
   static getAppliances(recipes) {
-    return [...new Set(recipes.map((recipe) => recipe.appliance))]
+    return [...new Set(
+      recipes.map((recipe) => 
+        recipe.appliance.charAt(0).toUpperCase() + recipe.appliance.slice(1).toLowerCase()
+      )
+    )];
   }
+  
 
   /**
    * GET USTENSILS FROM RECIPES
@@ -54,8 +62,13 @@ export default class RecipeModel {
    * @returns Set
    */
   static getUstensils(recipes) {
-    return [...new Set(recipes.flatMap((recipe) => recipe.ustensils))]
+    return [...new Set(
+      recipes.flatMap((recipe) => 
+        recipe.ustensils.map((ustensil) => ustensil.charAt(0).toUpperCase() + ustensil.slice(1).toLowerCase())
+      )
+    )];
   }
+  
 
   /**
    * NORMALIZE TEXT

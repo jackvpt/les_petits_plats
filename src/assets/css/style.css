@@ -11968,7 +11968,6 @@ textarea.form-control-lg {
 /* Fonts */
 /* Colors */
 /* Responsive */
-/* Gradient */
 /* Responsive */
 *,
 h1,
@@ -12168,10 +12167,6 @@ header .search-button .search-icon {
     width: 195px;
   }
 }
-.container-filterBar__buttons .rotate {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease; /* Transition fluide */
-}
 .container-filterBar__buttons .filterButton {
   padding: 15px;
   display: flex;
@@ -12186,6 +12181,14 @@ header .search-button .search-icon {
 }
 .container-filterBar__buttons .filterButton:hover {
   cursor: pointer;
+}
+.container-filterBar__buttons .filterButton i {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.container-filterBar__buttons .filterButton .rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
 .container-filterBar__buttons .filterMenu {
   position: absolute;
