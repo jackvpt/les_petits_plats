@@ -96,6 +96,7 @@ export default class RecipeModel {
     const searchBarFilter = this.normalizeText(selectedFilters.searchBar || "")
 
     if (
+      
       !searchBarFilter &&
       !selectedFilters.ingredients.size &&
       !selectedFilters.appliances.size &&
